@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2021 a las 01:42:31
+-- Tiempo de generación: 03-10-2021 a las 01:14:48
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.23
 
@@ -84,7 +84,7 @@ CREATE TABLE `fiscal` (
 --
 
 INSERT INTO `fiscal` (`id_fiscal`, `nombre`, `cedula`, `telefono`, `correo`, `whatsapp`) VALUES
-(1, 'Hugo Torres', '109862546', '3114700503', 'hugo@gmail.com', '3132024969');
+(1, 'Hugo Torres', '109862546', '3114700503', 'hugo1@gmail.com', '3132024969');
 
 -- --------------------------------------------------------
 
@@ -100,6 +100,34 @@ CREATE TABLE `nucleo` (
   `observaciones` text COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `nucleo`
+--
+
+INSERT INTO `nucleo` (`id_nucleo`, `nombre`, `fk_responsable`, `fk_trillador`, `observaciones`) VALUES
+(1, 'nucleolo', 1, 1, 'esto es una observacion\n');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `produccion`
+--
+
+CREATE TABLE `produccion` (
+  `id_produccion` int(11) NOT NULL,
+  `fk_socio` int(11) NOT NULL,
+  `area_sembrado` varchar(22) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `fk_variedad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `produccion`
+--
+
+INSERT INTO `produccion` (`id_produccion`, `fk_socio`, `area_sembrado`, `fecha`, `fk_variedad`) VALUES
+(1, 1, 'nose por ahi', '2021-10-02', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -109,10 +137,17 @@ CREATE TABLE `nucleo` (
 CREATE TABLE `referente_subnucleo` (
   `id_referente` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `cedula` int(11) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `whatsapp` int(11) NOT NULL
+  `cedula` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `whatsapp` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `referente_subnucleo`
+--
+
+INSERT INTO `referente_subnucleo` (`id_referente`, `nombre`, `cedula`, `telefono`, `whatsapp`) VALUES
+(1, 'anyela', '3215675656', '3215675656', '3215675656');
 
 -- --------------------------------------------------------
 
@@ -123,15 +158,22 @@ CREATE TABLE `referente_subnucleo` (
 CREATE TABLE `registro_socios` (
   `id_socios` int(11) NOT NULL,
   `nombre_apellido` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
-  `cedula` int(11) NOT NULL,
+  `cedula` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `fk_finca` int(11) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `whatsapp` int(11) NOT NULL,
+  `telefono` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `whatsapp` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `fk_asociacion` int(11) NOT NULL,
   `fk_nucleo` int(11) NOT NULL,
   `fk_sub_nucleo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `registro_socios`
+--
+
+INSERT INTO `registro_socios` (`id_socios`, `nombre_apellido`, `cedula`, `fk_finca`, `telefono`, `whatsapp`, `correo`, `fk_asociacion`, `fk_nucleo`, `fk_sub_nucleo`) VALUES
+(1, 'andres', '12141234', 3, '242623465', '4545254252', 'martinalmeida@gmail.com', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -164,10 +206,17 @@ INSERT INTO `representante` (`id_representante`, `nombre_repre`, `cedula`, `tele
 CREATE TABLE `responsable` (
   `id_responsable` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `cedula` int(11) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `whatsapp` int(11) NOT NULL
+  `cedula` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `whatsapp` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `responsable`
+--
+
+INSERT INTO `responsable` (`id_responsable`, `nombre`, `cedula`, `telefono`, `whatsapp`) VALUES
+(1, 'pinchucu', '12', '34', '45');
 
 -- --------------------------------------------------------
 
@@ -202,6 +251,13 @@ CREATE TABLE `subnucleo` (
   `fk_referente_sub` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `subnucleo`
+--
+
+INSERT INTO `subnucleo` (`id_subnucleo`, `nombre`, `fk_referente_sub`) VALUES
+(1, 'subnucleo1', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -234,10 +290,17 @@ INSERT INTO `tesorero` (`id_tesorero`, `nombre`, `cedula`, `telefono`, `correo`,
 CREATE TABLE `trilladores` (
   `id_trillador` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `cedula` int(11) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `whatsapp` int(11) NOT NULL
+  `cedula` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `whatsapp` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `trilladores`
+--
+
+INSERT INTO `trilladores` (`id_trillador`, `nombre`, `cedula`, `telefono`, `whatsapp`) VALUES
+(1, 'trillador 1', '76675576', '797987909', '56364');
 
 -- --------------------------------------------------------
 
@@ -260,6 +323,26 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `passwork`, `rol_fk`) VALUES
 (1, 'joni', 'joni@gmail.com', '123', 2),
 (7, 'aedw', 'joni@gmail.com', '123', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `variedad_arroz`
+--
+
+CREATE TABLE `variedad_arroz` (
+  `id_variedad` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `periodo_vegetal` varchar(22) COLLATE utf8_spanish_ci NOT NULL,
+  `rendimiento` varchar(22) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `variedad_arroz`
+--
+
+INSERT INTO `variedad_arroz` (`id_variedad`, `nombre`, `periodo_vegetal`, `rendimiento`) VALUES
+(1, 'arroz nel', '12', '56');
 
 -- --------------------------------------------------------
 
@@ -314,6 +397,14 @@ ALTER TABLE `nucleo`
   ADD PRIMARY KEY (`id_nucleo`),
   ADD KEY `fk_responsable` (`fk_responsable`),
   ADD KEY `fk_trillador` (`fk_trillador`);
+
+--
+-- Indices de la tabla `produccion`
+--
+ALTER TABLE `produccion`
+  ADD PRIMARY KEY (`id_produccion`),
+  ADD KEY `fk_socio` (`fk_socio`),
+  ADD KEY `fk_variedad` (`fk_variedad`);
 
 --
 -- Indices de la tabla `referente_subnucleo`
@@ -376,6 +467,12 @@ ALTER TABLE `usuarios`
   ADD KEY `rol_fk` (`rol_fk`);
 
 --
+-- Indices de la tabla `variedad_arroz`
+--
+ALTER TABLE `variedad_arroz`
+  ADD PRIMARY KEY (`id_variedad`);
+
+--
 -- Indices de la tabla `vereda`
 --
 ALTER TABLE `vereda`
@@ -389,13 +486,13 @@ ALTER TABLE `vereda`
 -- AUTO_INCREMENT de la tabla `asociacion`
 --
 ALTER TABLE `asociacion`
-  MODIFY `id_asociacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_asociacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `fincas`
 --
 ALTER TABLE `fincas`
-  MODIFY `id_finca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_finca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `fiscal`
@@ -407,25 +504,37 @@ ALTER TABLE `fiscal`
 -- AUTO_INCREMENT de la tabla `nucleo`
 --
 ALTER TABLE `nucleo`
-  MODIFY `id_nucleo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_nucleo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `produccion`
+--
+ALTER TABLE `produccion`
+  MODIFY `id_produccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `referente_subnucleo`
+--
+ALTER TABLE `referente_subnucleo`
+  MODIFY `id_referente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `registro_socios`
 --
 ALTER TABLE `registro_socios`
-  MODIFY `id_socios` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_socios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `representante`
 --
 ALTER TABLE `representante`
-  MODIFY `id_representante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_representante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `responsable`
 --
 ALTER TABLE `responsable`
-  MODIFY `id_responsable` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_responsable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -437,7 +546,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `subnucleo`
 --
 ALTER TABLE `subnucleo`
-  MODIFY `id_subnucleo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_subnucleo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tesorero`
@@ -449,7 +558,7 @@ ALTER TABLE `tesorero`
 -- AUTO_INCREMENT de la tabla `trilladores`
 --
 ALTER TABLE `trilladores`
-  MODIFY `id_trillador` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_trillador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -458,10 +567,16 @@ ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT de la tabla `variedad_arroz`
+--
+ALTER TABLE `variedad_arroz`
+  MODIFY `id_variedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `vereda`
 --
 ALTER TABLE `vereda`
-  MODIFY `id_vereda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_vereda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
@@ -471,9 +586,9 @@ ALTER TABLE `vereda`
 -- Filtros para la tabla `asociacion`
 --
 ALTER TABLE `asociacion`
-  ADD CONSTRAINT `asociacion_ibfk_1` FOREIGN KEY (`fk_representante`) REFERENCES `representante` (`id_representante`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `asociacion_ibfk_2` FOREIGN KEY (`fk_fiscal`) REFERENCES `fiscal` (`id_fiscal`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `asociacion_ibfk_3` FOREIGN KEY (`fk_tesorero`) REFERENCES `tesorero` (`id_tesorero`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `asociacion_ibfk_3` FOREIGN KEY (`fk_tesorero`) REFERENCES `tesorero` (`id_tesorero`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `asociacion_ibfk_4` FOREIGN KEY (`id_asociacion`) REFERENCES `representante` (`id_representante`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `fincas`
@@ -487,6 +602,13 @@ ALTER TABLE `fincas`
 ALTER TABLE `nucleo`
   ADD CONSTRAINT `nucleo_ibfk_1` FOREIGN KEY (`fk_responsable`) REFERENCES `responsable` (`id_responsable`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `nucleo_ibfk_2` FOREIGN KEY (`fk_trillador`) REFERENCES `trilladores` (`id_trillador`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `produccion`
+--
+ALTER TABLE `produccion`
+  ADD CONSTRAINT `produccion_ibfk_1` FOREIGN KEY (`fk_socio`) REFERENCES `registro_socios` (`id_socios`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `produccion_ibfk_2` FOREIGN KEY (`fk_variedad`) REFERENCES `variedad_arroz` (`id_variedad`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `registro_socios`
