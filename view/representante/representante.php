@@ -1,7 +1,3 @@
-<?php
-include_once 'insertar_modal.php';
-include_once 'editar_modal.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +21,10 @@ include_once 'editar_modal.php';
 </head>
 
 <body>
+	<?php
+	include_once 'insertar_modal.php';
+	include_once 'editar_modal.php';
+	?>
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
@@ -49,6 +49,29 @@ include_once 'editar_modal.php';
 							<li class="sidebar-item"><a class="sidebar-link" href="../fiscal/fiscal.php">Fiscal</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="../tesorero/tesorero.php">Tesorero</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="../asociacion/asociacion.php">Asociacion</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../responsable/responsable.php">Responsable</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../trillador/trillador.php">Trillador</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../nucleo/nucleo.php">Nucleo</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../referente/referente.php">Referente Subnucleo</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../subnucleo/subnucleo.php">Subnucleo</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../socios/socios.php">Socios</a></li>
+						</ul>
+					</li>
+					<li class="sidebar-item">
+						<a href="#produc" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+							<span class="align-middle"><i class="fas fa-chart-line"></i> Produccion <i class="fas fa-angle-down"></i></span>
+						</a>
+						<ul id="produc" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="../variedad/variedad.php">Variedad de Arroz</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../produccion/produccion.php">Produccion</a></li>
+						</ul>
+					</li>
+					<li class="sidebar-item">
+						<a href="#report" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+							<span class="align-middle"><i class="far fa-file-pdf"></i> Reportes <i class="fas fa-angle-down"></i></span>
+						</a>
+						<ul id="report" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="../reportes/reporte_socio.php">Reporte Socio</a></li>
 						</ul>
 					</li>
 
@@ -154,7 +177,7 @@ include_once 'editar_modal.php';
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="../../assets/js/template/app.js"></script>
-	<script src="../../assets/js/fetch/representante_fetch.js"></script>
+	<script src="../../assets/js/fetch/representante.js"></script>
 
 </body>
 

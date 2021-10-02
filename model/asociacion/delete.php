@@ -1,6 +1,6 @@
 <?php
 include_once "../../config/database.php";
-include_once "../objects/fincas.php";
+include_once "../objects/asociacion.php";
 
 $database = new Database();
 $db = $database->getConnection();

@@ -12,9 +12,11 @@ class crud
 
     //Propiedades de los objetos
     public $id;
-    public $nombre_finca;
-    public $area;
-    public $fk_vereda;
+    public $nombre_asoci;
+    public $nit;
+    public $fk_representante;
+    public $fk_tesorero;
+    public $fk_fiscal;
     public $data;
 
     // Explicación sobre la función https://www.w3schools.com/php/php_oop_constructor.asp
@@ -55,7 +57,7 @@ class crud
 
     function selectupdate()
     {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id_finca  =  " . $this->data . " ";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id_asociacion  =  " . $this->data . " ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute(array());
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -66,7 +68,7 @@ class crud
     //listar la tabla principal por medio del fetch
     function table()
     {
-        $query = "SELECT asociacion.id_asociacion, asociacion.nombre_asoci, asociacion.nit, representante.nombre_repre, tesorero.nombre, fiscal.nombre FROM (((" . $this->table_name . " LEFT JOIN representante ON asociacion.fk_representante = representante.id_representante)LEFT JOIN tesorero ON asociacion.fk_tesorero = tesorero.id_tesorero)LEFT JOIN fiscal ON asociacion.fk_fiscal = fiscal.id_fiscal ) ";
+        $query = "SELECT asociacion.id_asociacion, asociacion.nombre_asoci, asociacion.nit, representante.nombre_repre, tesorero.nombre, (fiscal.nombre)nomfiscal FROM (((" . $this->table_name . " LEFT JOIN representante ON asociacion.fk_representante = representante.id_representante)LEFT JOIN tesorero ON asociacion.fk_tesorero = tesorero.id_tesorero)LEFT JOIN fiscal ON asociacion.fk_fiscal = fiscal.id_fiscal ) ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute(array());
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -77,15 +79,19 @@ class crud
     //insertar del formulario model insert
     function create()
     {
-        $query = "INSERT INTO " . $this->table_name . " SET nombre_finca=?, area=?, fk_vereda=? ";
+        $query = "INSERT INTO " . $this->table_name . " SET nombre_asoci=?, nit=?, fk_representante=?, fk_tesorero=?, fk_fiscal=? ";
         $stmt = $this->conn->prepare($query);
-        $this->nombre_finca = htmlspecialchars(strip_tags($this->nombre_finca));
-        $this->area = htmlspecialchars(strip_tags($this->area));
-        $this->fk_vereda = htmlspecialchars(strip_tags($this->fk_vereda));
+        $this->nombre_asoci = htmlspecialchars(strip_tags($this->nombre_asoci));
+        $this->nit = htmlspecialchars(strip_tags($this->nit));
+        $this->fk_representante = htmlspecialchars(strip_tags($this->fk_representante));
+        $this->fk_tesorero = htmlspecialchars(strip_tags($this->fk_tesorero));
+        $this->fk_fiscal = htmlspecialchars(strip_tags($this->fk_fiscal));
         //orden de variables preparadas
-        $stmt->bindParam(1, $this->nombre_finca);
-        $stmt->bindParam(2, $this->area);
-        $stmt->bindParam(3, $this->fk_vereda);
+        $stmt->bindParam(1, $this->nombre_asoci);
+        $stmt->bindParam(2, $this->nit);
+        $stmt->bindParam(3, $this->fk_representante);
+        $stmt->bindParam(4, $this->fk_tesorero);
+        $stmt->bindParam(5, $this->fk_fiscal);
         //validamos la insercion
         if ($stmt->execute()) {
             return true;
@@ -95,15 +101,19 @@ class crud
 
     function makeUpdate()
     {
-        $query = "UPDATE " . $this->table_name . " SET nombre_finca=?, area=?, fk_vereda=?  WHERE id_finca = " . $this->id . " ";
+        $query = "UPDATE " . $this->table_name . " SET nombre_asoci=?, nit=?, fk_representante=?, fk_tesorero=?, fk_fiscal=? WHERE id_asociacion = " . $this->id . " ";
         $stmt = $this->conn->prepare($query);
-        $this->nombre_vereda = htmlspecialchars(strip_tags($this->nombre_finca));
-        $this->descripcion = htmlspecialchars(strip_tags($this->area));
-        $this->descripcion = htmlspecialchars(strip_tags($this->fk_vereda));
+        $this->nombre_asoci = htmlspecialchars(strip_tags($this->nombre_asoci));
+        $this->nit = htmlspecialchars(strip_tags($this->nit));
+        $this->fk_representante = htmlspecialchars(strip_tags($this->fk_representante));
+        $this->fk_tesorero = htmlspecialchars(strip_tags($this->fk_tesorero));
+        $this->fk_fiscal = htmlspecialchars(strip_tags($this->fk_fiscal));
 
-        $stmt->bindParam(1, $this->nombre_finca);
-        $stmt->bindParam(2, $this->area);
-        $stmt->bindParam(3, $this->fk_vereda);
+        $stmt->bindParam(1, $this->nombre_asoci);
+        $stmt->bindParam(2, $this->nit);
+        $stmt->bindParam(3, $this->fk_representante);
+        $stmt->bindParam(4, $this->fk_tesorero);
+        $stmt->bindParam(5, $this->fk_fiscal);
 
         if ($stmt->execute()) {
             return true;
@@ -114,7 +124,7 @@ class crud
     //eliminamos un registro por medio del id 
     function delete()
     {
-        $query = "DELETE FROM " . $this->table_name . " WHERE id_finca =  " . $this->data . " ";
+        $query = "DELETE FROM " . $this->table_name . " WHERE id_asociacion =  " . $this->data . " ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 

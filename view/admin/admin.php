@@ -34,7 +34,7 @@
 						Principal
 					</li>
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 						<a href="#auth" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
 							<span class="align-middle"><i class="fas fa-people-carry"></i> Socios <i class="fas fa-angle-down"></i></span>
 						</a>
@@ -45,8 +45,33 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="../fiscal/fiscal.php">Fiscal</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="../tesorero/tesorero.php">Tesorero</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="../asociacion/asociacion.php">Asociacion</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../responsable/responsable.php">Responsable</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../trillador/trillador.php">Trillador</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../nucleo/nucleo.php">Nucleo</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../referente/referente.php">Referente Subnucleo</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../subnucleo/subnucleo.php">Subnucleo</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../socios/socios.php">Socios</a></li>
 						</ul>
 
+					</li>
+
+					<li class="sidebar-item">
+						<a href="#produc" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+							<span class="align-middle"><i class="fas fa-chart-line"></i> Produccion <i class="fas fa-angle-down"></i></span>
+						</a>
+						<ul id="produc" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="../variedad/variedad.php">Variedad de Arroz</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="../produccion/produccion.php">Produccion</a></li>
+						</ul>
+					</li>
+
+					<li class="sidebar-item">
+						<a href="#report" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+							<span class="align-middle"><i class="far fa-file-pdf"></i> Reportes <i class="fas fa-angle-down"></i></span>
+						</a>
+						<ul id="report" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="../reportes/reporte_socio.php">Reporte Socio</a></li>
+						</ul>
 					</li>
 
 				</ul>

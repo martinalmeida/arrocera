@@ -12,7 +12,7 @@ async function cargarTablaAsync(){
                     <td>${e.nit}</td>
                     <td>${e.nombre_repre}</td>
                     <td>${e.nombre}</td>
-                    <td>${e.nombre}</td>
+                    <td>${e.nomfiscal}</td>
                     <td class="text-center">
                         <button type="button" class="btnEditar btn btn-success" data-bs-toggle="modal" data-bs-target="#update_modal" onclick="updateForm('${e.id_asociacion}');">Edit <i class="far fa-edit text-white"></i></button> 
                         <button class="btn btn-danger" onclick="eliminaregistro('${e.id_asociacion}');" >Delete <i class="far fa-minus-square text-white"></i></button>
@@ -29,18 +29,22 @@ cargarTablaAsync();
 window.addEventListener('load', () => {
 
     let button = document.getElementById('formulario_insert');
-    let nombre_finca = document.getElementById('nombre_finca');
-    let area = document.getElementById('area');
-    let fk_vereda = document.getElementById('fk_vereda');
+    let nombre_asoci = document.getElementById('nombre_asoci');
+    let nit = document.getElementById('nit');
+    let fk_representante = document.getElementById('fk_representante');
+    let fk_tesorero = document.getElementById('fk_tesorero');
+    let fk_fiscal = document.getElementById('fk_fiscal');
     let alert = document.getElementById('alerta');
 
     function data() {
 
         let datos = new FormData();
-        datos.append("nombre_finca", nombre_finca.value);
-        datos.append("area", area.value);
-        datos.append("fk_vereda", fk_vereda.value);
-        fetch('../../model/fincas/insert.php', {
+        datos.append("nombre_asoci", nombre_asoci.value);
+        datos.append("nit", nit.value);
+        datos.append("fk_representante", fk_representante.value);
+        datos.append("fk_tesorero", fk_tesorero.value);
+        datos.append("fk_fiscal", fk_fiscal.value);
+        fetch('../../model/asociacion/insert.php', {
             method: 'POST',
             body: datos
         }).then(Response => Response.json())
@@ -98,7 +102,7 @@ let alert = document.getElementById('deletealert');
 
 function eliminaregistro(id) {
 
-    fetch("../../model/fincas/delete.php", {
+    fetch("../../model/asociacion/delete.php", {
         method: "POST",
         body: id
         }).then(response => response.text()).then(response => {
@@ -125,19 +129,23 @@ function alerta_delete() {
 
 //Sección GET Update en donde se seleccionan datos y se pintan en la modal
 let id_form = document.getElementById('id_up');
-let nombre_finca_up = document.getElementById('nombre_finca_up');
-let area_up = document.getElementById('area_up');
-let fk_vereda_up = document.getElementById('fk_vereda_up');
+let nombre_asoci_up = document.getElementById('nombre_asoci_up');
+let nit_up = document.getElementById('nit_up');
+let fk_representante_up = document.getElementById('fk_representante_up');
+let fk_tesorero_up = document.getElementById('fk_tesorero_up');
+let fk_fiscal_up = document.getElementById('fk_fiscal_up');
 
 function updateForm(id) {
-    fetch("../../model/fincas/select_update.php", {
+    fetch("../../model/asociacion/select_update.php", {
         method: "POST",
         body: id
     }).then(response => response.json()).then(response => {
-        id_form.value = response.id_finca;
-        nombre_finca_up.value = response.nombre_finca;
-        area_up.value = response.area;
-        fk_vereda_up.value = response.fk_vereda;
+        id_form.value = response.id_asociacion;
+        nombre_asoci_up.value = response.nombre_asoci;
+        nit_up.value = response.nit;
+        fk_representante_up.value = response.fk_representante;
+        fk_tesorero_up.value = response.fk_tesorero;
+        fk_fiscal_up.value = response.fk_fiscal;
     })
 }
 //Fin sección GET Update
@@ -147,18 +155,22 @@ window.addEventListener('load', () => {
 
     let button = document.getElementById('formulario_update');
     let id_up = document.getElementById('id_up');
-    let nombre_finca_up = document.getElementById('nombre_finca_up');
-    let area_up = document.getElementById('area_up');
-    let fk_vereda_up = document.getElementById('fk_vereda_up');
+    let nombre_asoci_up = document.getElementById('nombre_asoci_up');
+    let nit_up = document.getElementById('nit_up');
+    let fk_representante_up = document.getElementById('fk_representante_up');
+    let fk_tesorero_up = document.getElementById('fk_tesorero_up');
+    let fk_fiscal_up = document.getElementById('fk_fiscal_up');
     let alert = document.getElementById('deletealert');
   
     function data() {
         let datos = new FormData();
         datos.append("id_up", id_up.value);
-        datos.append("nombre_finca_up", nombre_finca_up.value);
-        datos.append("area_up", area_up.value);
-        datos.append("fk_vereda_up", fk_vereda_up.value);
-        fetch('../../model/fincas/update.php', {
+        datos.append("nombre_asoci_up", nombre_asoci_up.value);
+        datos.append("nit_up", nit_up.value);
+        datos.append("fk_representante_up", fk_representante_up.value);
+        datos.append("fk_tesorero_up", fk_tesorero_up.value);
+        datos.append("fk_fiscal_up", fk_fiscal_up.value);
+        fetch('../../model/asociacion/update.php', {
             method: 'POST',
             body: datos
         }).then(Response => Response.json())
